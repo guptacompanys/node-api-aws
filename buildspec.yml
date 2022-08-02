@@ -19,7 +19,7 @@ phases:
   post_build:
     commands:
       - echo success building docker image
-      -printf 'success' > imagedefinitions.json
+      - printf 'success' > imagedefinitions.json
 
 artifacts:
   files:
