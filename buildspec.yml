@@ -21,9 +21,7 @@ phases:
 
   post_build:
     commands:
-      - echo Pushing to ECR
-      - docker push 121272337069.dkr.ecr.us-east-2.amazonaws.com/node-api:latest
-      - printf '[{"name":"node-api","imageUri":"121272337069.dkr.ecr.us-east-2.amazonaws.com/node-api:latest"}]' > imagedefinitions.json
+      - echo success building docker image
 
 artifacts:
   files:
