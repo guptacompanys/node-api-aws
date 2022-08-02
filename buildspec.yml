@@ -14,12 +14,16 @@ phases:
     commands:
       - echo Running tests
       - npm test
-      - echo test passed
+      - echo Building and tagging Docker image
+      - aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 463519496884.dkr.ecr.us-east-1.amazonaws.com
+      - docker build -t node-api .
+      - docker tag node-api:latest 463519496884.dkr.ecr.us-east-1.amazonaws.com/node-api:latest
 
   post_build:
     commands:
-      - echo success building docker image
-      - printf 'success' > imagedefinitions.json
+      - echo Pushing to ECR
+      - docker push 463519496884.dkr.ecr.us-east-1.amazonaws.com/node-api:latest
+      - printf '[{"name":"node-api","463519496884.dkr.ecr.us-east-1.amazonaws.com/node-api:latest"}]' > imagedefinitions.json
 
 artifacts:
   files:
